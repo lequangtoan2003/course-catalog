@@ -1,6 +1,6 @@
 // app/layout.tsx
 import { Providers } from "./providers";
-import "../../course-catalog/app/globals.css";
+import "./styles/globals.css";
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "@/components/ui/sonner";
 
