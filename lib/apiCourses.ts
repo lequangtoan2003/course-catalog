@@ -1,7 +1,7 @@
 import { supabase } from "./supabase";
 
 export interface Course {
-  id: string;
+  id: string | number;
   title: string;
   description?: string;
   whatYoullLearn?: string[];
