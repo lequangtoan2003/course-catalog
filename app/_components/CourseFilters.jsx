@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,7 +21,7 @@ export function CourseFilters({
   return (
     <div className="flex gap-2 justify-start items-center p-4">
       <Select onValueChange={setSelectedLevel} value={selectedLevel}>
-        <SelectTrigger className="w-[110px] rounded-full border-gray-950">
+        <SelectTrigger className="w-[110px] rounded-full border-border">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -32,7 +32,7 @@ export function CourseFilters({
         </SelectContent>
       </Select>
       <Select onValueChange={setSelectedRating} value={selectedRating}>
-        <SelectTrigger className="w-[118px] rounded-full border-gray-950">
+        <SelectTrigger className="w-[118px] rounded-full border-border">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -48,16 +48,16 @@ export function CourseFilters({
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full rounded-full border-gray-950 pl-10"
+          className="w-full rounded-full border-border pl-10 bg-background text-foreground"
         />
         <Search
-          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
           size={20}
         />
       </div>
       <Button
         onClick={clearFilters}
-        className="bg-white border border-[#5E0078] text-[#5E0078] h-[25px] hover:bg-[#8d599b] hover:text-white rounded-full px-4"
+        className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground rounded-full px-4"
       >
         Clear Filters
       </Button>

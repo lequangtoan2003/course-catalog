@@ -1,12 +1,15 @@
 "use client";
 
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart, Moon, ShoppingCart, Sun } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Header() {
+  const { theme, toggleTheme } = useTheme();
   const { cartItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -15,18 +18,18 @@ export default function Header() {
   };
 
   return (
-    <div className="relative flex items-center justify-between p-4">
+    <div className="relative flex items-center justify-between p-4 bg-background text-foreground">
       <div className="flex items-center justify-center gap-2">
         <Link href={"/"}>
-          <h1 className="text-2xl font-bold text-black ">Logo</h1>
+          <h1 className="text-2xl font-bold text-foreground ">Logo</h1>
         </Link>
-        <span className="text-gray-500 mt-1">Explore</span>
+        <span className="text-muted-foreground mt-1">Explore</span>
       </div>
       <div className="flex items-center justify-center gap-4">
         <div className="relative cursor-pointer" onClick={toggleCart}>
           <ShoppingCart />
           {cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+            <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs rounded-full px-2 py-1">
               {cartItems.length}
             </span>
           )}
@@ -34,22 +37,28 @@ export default function Header() {
         <div className="">
           <Heart />
         </div>
-        <div className="w-[48px] h-[48px] bg-[#16001B] rounded-full flex items-center justify-center">
-          <h1 className="text-white">LT</h1>
+        <div className="">
+          <Button
+            onClick={toggleTheme}
+            className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground rounded-full px-4"
+          >
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </Button>
+        </div>
+        <div className="w-[48px] h-[48px] bg-primary rounded-full flex items-center justify-center">
+          <h1 className="text-primary-foreground">LT</h1>
         </div>
       </div>
-
       {isCartOpen && (
-        <div className="absolute top-12 right-0 mt-2 w-80 bg-white border border-gray-300 rounded-lg shadow-lg z-50 p-4">
-          <h2 className="text-lg font-bold mb-4">Your Cart</h2>
+        <div className="absolute top-12 right-0 mt-2 w-80 bg-background border border-border rounded-lg shadow-lg z-50 p-4">
           {cartItems.length === 0 ? (
-            <p className="text-gray-500">Your cart is empty.</p>
+            <p className="text-muted-foreground">Your cart is empty.</p>
           ) : (
             <ul className="flex flex-col gap-4">
               {cartItems.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-center gap-4 border-b pb-2"
+                  className="flex items-center gap-4 border-b border-border pb-2"
                 >
                   {item.imageUrl ? (
                     <Image
@@ -60,14 +69,14 @@ export default function Header() {
                       className="object-cover rounded"
                     />
                   ) : (
-                    <div className="w-[50px] h-[50px] bg-gray-200 flex items-center justify-center text-gray-500 text-xs">
+                    <div className="w-[50px] h-[50px] bg-muted flex items-center justify-center text-muted-foreground text-xs">
                       No image
                     </div>
                   )}
                   <div className="flex flex-col">
                     <h3 className="font-semibold">{item.title}</h3>{" "}
                     {item.price !== undefined && (
-                      <p className="text-gray-900">${item.price}.000</p>
+                      <p className="text-foreground">${item.price}.000</p>
                     )}
                   </div>
                 </li>
@@ -75,7 +84,7 @@ export default function Header() {
             </ul>
           )}
 
-          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          <button className="mt-4 bg-primary text-primary-foreground px-4 py-2 rounded">
             Checkout
           </button>
         </div>

@@ -30,7 +30,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
   return (
     <div className="mx-auto w-[283px]">
-      <Card className="overflow-hidden w-[316px] h-[360px] p-[16px]">
+      <Card className="overflow-hidden w-[316px] h-[360px] p-[16px] bg-card text-card-foreground">
         <CardHeader className="relative h-[132px] w-[283px] mx-auto rounded-lg p-0">
           <Link href={`/course/${course.id}`}>
             {course.imageUrl ? (
@@ -42,7 +42,7 @@ export function CourseCard({ course }: CourseCardProps) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ) : (
-              <div className="h-full w-full bg-gray-200 flex items-center justify-center text-gray-500">
+              <div className="h-full w-full bg-muted flex items-center justify-center text-muted-foreground">
                 No images
               </div>
             )}
@@ -51,33 +51,36 @@ export function CourseCard({ course }: CourseCardProps) {
         <CardContent className="flex flex-col justify-between h-[192px] p-0 pt-4">
           <div>
             <Link href={`/course/${course.id}`}>
-              <CardTitle className="text-lg text-primary-900 leading-none pb-1 cursor-pointer hover:underline">
+              <CardTitle className="text-lg text-primary leading-none pb-1 cursor-pointer hover:underline">
                 {course.title}
               </CardTitle>
             </Link>
             {course.description && (
-              <p className="text-[#363636] text-xs">{course.description}</p>
+              <p className="text-muted-foreground text-xs">
+                {course.description}
+              </p>
             )}
             {course.author && course.author.length > 0 && (
-              <p className="text-gray-400 text-[9px]">{course.author}</p>
+              <p className="text-muted-foreground text-[9px]">
+                {course.author}
+              </p>
             )}
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               {course.ratings !== undefined && (
-                <p className="text-gray-500 flex items-center gap-1 border rounded-md px-2 bg-gray-100 h-6">
-                  <Star className="text-[#FF6F00] w-4 h-4" />
-                  {course.ratings}
+                <p className="text-muted-foreground flex items-center gap-1 border border-border rounded-md px-2 bg-muted h-6">
+                  <Star className="text-[#FF6F00] w-4 h-4" /> {course.ratings}
                 </p>
               )}
               {course.totalRatings !== undefined && (
-                <p className="text-gray-500 flex items-center h-6 gap-1 border rounded-md px-2 bg-gray-100">
+                <p className="text-muted-foreground flex items-center h-6 gap-1 border border-border rounded-md px-2 bg-muted">
                   {course.totalRatings} rating
                   {course.totalRatings > 1 ? "s" : ""}
                 </p>
               )}
               {course.level && (
-                <p className="text-gray-500 flex items-center gap-1 border rounded-md px-2 bg-gray-100 h-6">
+                <p className="text-muted-foreground flex items-center gap-1 border border-border rounded-md px-2 bg-muted h-6">
                   {course.level}
                 </p>
               )}
@@ -85,10 +88,10 @@ export function CourseCard({ course }: CourseCardProps) {
             <div className="flex justify-between items-center">
               <div className="flex gap-2 items-center">
                 {course.price !== undefined && (
-                  <p className="text-gray-900">${course.price}.000</p>
+                  <p className="text-foreground">${course.price}.000</p>
                 )}
                 {course.originalPrice !== undefined && (
-                  <p className="text-gray-500 line-through text-xs">
+                  <p className="text-muted-foreground line-through text-xs">
                     ${course.originalPrice}.000
                   </p>
                 )}
@@ -96,7 +99,7 @@ export function CourseCard({ course }: CourseCardProps) {
               <div>
                 <Button
                   onClick={handleAddToCart}
-                  className="bg-white border border-[#5E0078] text-[#5E0078] h-[25px] hover:bg-[#8d599b] hover:text-white"
+                  className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground"
                 >
                   Add to cart
                 </Button>

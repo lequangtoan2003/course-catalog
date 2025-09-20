@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { CourseCard } from "./CourseCard";
 import { CourseFilters } from "./CourseFilters";
-import { Course } from "../../lib/apiCourses"; 
+import { Course } from "../../lib/apiCourses";
 
 export function CourseCatalog() {
   const { courses, isLoading, error } = useCourses();
@@ -69,8 +69,8 @@ export function CourseCatalog() {
   if (isLoading) {
     return (
       <div className="container mx-auto py-10">
-        <p className="text-center text-gray-600">
-          <ClipLoader color="#0070f3" size={50} />
+        <p className="text-center text-muted-foreground">
+          <ClipLoader color="hsl(var(--primary))" size={50} />{" "}
         </p>
       </div>
     );
@@ -80,7 +80,7 @@ export function CourseCatalog() {
     console.error("Error loading courses:", error);
     return (
       <div className="container mx-auto py-10">
-        <p className="text-center text-red-500">
+        <p className="text-center text-destructive">
           An error occurred while loading the course list. Check the console for
           details.
         </p>
@@ -100,7 +100,7 @@ export function CourseCatalog() {
         clearFilters={clearFilters}
       />
       {filteredCourses.length === 0 ? (
-        <p className="text-center text-gray-600">
+        <p className="text-center text-muted-foreground">
           No matching courses were found.
         </p>
       ) : (
@@ -115,17 +115,17 @@ export function CourseCatalog() {
               <Button
                 onClick={goToPreviousPage}
                 disabled={currentPage === 1}
-                className="bg-white border border-[#5E0078] text-[#5E0078] h-[25px] hover:bg-[#8d599b] hover:text-white rounded-full px-4"
+                className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground rounded-full px-4"
               >
                 Previous
               </Button>
-              <span className="text-[#5E0078]">
+              <span className="text-primary">
                 Page {currentPage} of {totalPages}
               </span>
               <Button
                 onClick={goToNextPage}
                 disabled={currentPage === totalPages}
-                className="bg-white border border-[#5E0078] text-[#5E0078] h-[25px] hover:bg-[#8d599b] hover:text-white rounded-full px-4"
+                className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground rounded-full px-4"
               >
                 Next
               </Button>

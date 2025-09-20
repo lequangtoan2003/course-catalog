@@ -3,6 +3,7 @@ import { Providers } from "./providers";
 import "./styles/globals.css";
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "./context/ThemeContext";
 
 export const metadata = {
   title: "Course Catalog",
@@ -17,12 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CartProvider>
-          <Providers>
-            {children}
-            <Toaster />
-          </Providers>
-        </CartProvider>
+        <ThemeProvider>
+          <CartProvider>
+            <Providers>
+              {children}
+              <Toaster />
+            </Providers>
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
