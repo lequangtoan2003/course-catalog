@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useCart } from "../context/CartContext";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "../context/ThemeContext";
-import { useCourses } from "../hooks/useCourses";
 
 interface CartItem {
   id: string | number;
@@ -26,7 +25,6 @@ interface CartContext {
 }
 
 export default function Header() {
-  const { courses } = useCourses();
   const { theme, toggleTheme } = useTheme() as ThemeContext;
   const { cartItems } = useCart() as CartContext;
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -98,11 +96,8 @@ export default function Header() {
           ) : (
             <ul className="flex flex-col gap-4">
               {cartItems.map((item, index) => (
-                <Link href={`/course/${item.id}`}>
-                  <li
-                    key={item.id || index}
-                    className="flex items-center gap-4 border-b border-border pb-2"
-                  >
+                <Link key={item.id || index} href={`/course/${item.id}`}>
+                  <li className="flex items-center gap-4 border-b border-border pb-2">
                     {item.imageUrl ? (
                       <Image
                         src={item.imageUrl}
