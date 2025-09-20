@@ -29,6 +29,7 @@ export default function Header() {
   const { cartItems } = useCart() as CartContext;
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const cartRef = useRef<HTMLDivElement>(null);
+  const cartIconRef = useRef<HTMLDivElement>(null);
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -36,7 +37,12 @@ export default function Header() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+      if (
+        cartRef.current &&
+        !cartRef.current.contains(event.target as Node) &&
+        cartIconRef.current &&
+        !cartIconRef.current.contains(event.target as Node)
+      ) {
         setIsCartOpen(false);
       }
     };
@@ -59,7 +65,11 @@ export default function Header() {
         <span className="text-muted-foreground mt-1">Explore</span>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <div className="relative cursor-pointer" onClick={toggleCart}>
+        <div
+          className="relative cursor-pointer"
+          ref={cartIconRef}
+          onClick={toggleCart}
+        >
           <ShoppingCart />
           {cartItems.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs rounded-full px-2 py-1">
