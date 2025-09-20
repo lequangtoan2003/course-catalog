@@ -42,7 +42,11 @@ export default function Header() {
             onClick={toggleTheme}
             className="bg-background border border-primary text-primary h-[25px] hover:bg-secondary hover:text-secondary-foreground rounded-full px-4"
           >
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            {theme === "light" ? (
+              <Moon size={20} className="text-primary" />
+            ) : (
+              <Sun size={20} className="text-primary" />
+            )}
           </Button>
         </div>
         <div className="w-[48px] h-[48px] bg-primary rounded-full flex items-center justify-center">
